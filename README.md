@@ -6,4 +6,4 @@
 [DEMO](https://linkedin-profile-creator-pdgp-oag7cb3q9-rajdeepc.vercel.app/)
 
 
-Project Idea inspiration from @lakbychance
+Project Idea inspiration from [lakbychance](https://github.com/lakbychance)
