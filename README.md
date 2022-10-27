@@ -3,7 +3,7 @@
 ![Project Image](https://github.com/Rajdeepc/linkedin-profile-creator/blob/master/github/hero.png?raw=true)
 
 ## Try here:
-[DEMO](https://linkedin-profile-creator-pdgp-oag7cb3q9-rajdeepc.vercel.app/)
+[DEMO](https://linkedin-profile-creator-pdgp.vercel.app/)
 
 
 Project Idea inspiration from [lakbychance](https://github.com/lakbychance)
