@@ -1,0 +1,42 @@
+.item{
+    margin: 20px 0px;
+    label {
+        display: block;
+    }
+    .slider{
+        width: 100%;
+    }
+    .textInput {
+        width: 100%;
+        padding: 10px;
+        border-radius: 6px;
+    }
+    .radio{
+        background-color: #e2e2e2;
+        padding: 4px;
+        border-radius: 6px;
+        font-size: 12px;
+        align-items: center;
+        justify-content: center;
+        display: flex;
+    }
+}
+.styleContainer{
+    width: 100%;
+}
+.image {
+    object-fit: cover;
+    aspect-ratio: 1/1;
+    width: 20rem;
+    border-radius: 9999px;
+    height: 20rem;
+    max-width: 100%;
+}
+.row{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 0.25rem;
+    justify-content: flex-start;
+    align-items: center;
+}
