@@ -1,0 +1,36 @@
+.wrapper {
+  width: 100%;
+  min-height: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: row;  
+  .sliderContainer {
+    display: flex;
+    flex: 1 1;
+    margin-bottom: 20px;
+    flex-direction: column;
+    .controlWrapper {
+      flex: 0.2;
+      .controlItem {
+        flex: 0.8;
+        p {
+          font-size: 0.8rem;
+        }
+        img {
+          width: 32px;
+          height: 32px;
+        }
+      }
+    }
+  }
+}
+.filters{
+  display: flex;
+  gap:1rem;
+  .filterItem {
+    background: #c9c9cb;
+    border: 0px;
+    padding: 0.6rem;
+    font-size: 12px;
+  }
+}

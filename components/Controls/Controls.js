@@ -1,14 +1,16 @@
-import React, { useState } from "react"
+import React, { useEffect, useState } from "react"
 import styles from "./Controls.module.scss"
 import SVGContainer from "../SVGContainer/SVGContainer"
 import Button from "../Button/Button"
+import ImageControls from "../ImageControls/ImageControls"
+import {IMAGE_CONTROLS, IMAGE_FILTERS} from "../../utils/ImageControlsConstants"
 
 const style = {
   lineHeight: "2.5rem",
   fontWeight: "700",
   fill: "#FFFFFF",
   letterSpacing: "2.4px",
-  fontFamily:'sans-serif'
+  fontFamily: "sans-serif",
 }
 
 export default function Controls() {
@@ -85,28 +87,36 @@ export default function Controls() {
 
       canvas.height = a * devicePixelRatio
 
-    
-      let containerRatio = canvas.width / canvas.height;
-      let width = base_image.naturalWidth;
-      let height = base_image.naturalHeight;
-      let imgRatio = height / width;
-  
-      if (imgRatio > containerRatio) { // image's height too big
-        height = width * containerRatio;
-      } else { // image's width too big
-        width = height / containerRatio;
+      let containerRatio = canvas.width / canvas.height
+      let width = base_image.naturalWidth
+      let height = base_image.naturalHeight
+      let imgRatio = height / width
+
+      if (imgRatio > containerRatio) {
+        // image's height too big
+        height = width * containerRatio
+      } else {
+        // image's width too big
+        width = height / containerRatio
       }
   
       let s = {
         width: width,
         height: height,
-        offsetX: (base_image.naturalWidth - width) * .5,
-        offsetY: (base_image.naturalHeight - height) * .5
-      };
-      context.drawImage(base_image, s.offsetX, s.offsetY, s.width, s.height, 0, 0, canvas.width, canvas.height);
-
-
-
+        offsetX: (base_image.naturalWidth - width) * 0.5,
+        offsetY: (base_image.naturalHeight - height) * 0.5,
+      }
+      context.drawImage(
+        base_image,
+        s.offsetX,
+        s.offsetY,
+        s.width,
+        s.height,
+        0,
+        0,
+        canvas.width,
+        canvas.height
+      )
       context.drawImage(image, 0, 0, a * devicePixelRatio, a * devicePixelRatio)
       let png = canvas.toDataURL() // default png
       // let jpeg = canvas.toDataURL('image/jpg');
@@ -118,9 +128,27 @@ export default function Controls() {
     image.src = blobURL
   }
 
+  const handleImageControl = (val) => {
+  //   let canvas = document.getElementById("control")
+  //   let context = canvas.getContext("2d")
+  //   let imageData = context.getImageData(0, 0, canvas.width, canvas.height);    
+  //   if(val === 0) {
+  //     context.drawImage(imageData, 0, 0);
+  //   }
+  //  // imageData.style.filter = 'saturation(60%)'
+  //   // console.log(context)
+  //  applyBrightness(
+  //     imageData.data,
+  //     parseInt(val, 10)
+  //   );
+  //   context.putImageData(imageData, 0, 0);
+    
+  }
+
   return (
     <>
       <img
+      id="sourceImage"
         src={photo?.imagePreviewUrl}
         className={styles.image}
         alt="image upload"
@@ -147,7 +175,7 @@ export default function Controls() {
           />
         </div>
         <div className={styles.item}>
-          <div>Change Color</div>
+        <h5>Change Color</h5>
           <div className={styles.space}>
             <div
               className={styles.row}
@@ -187,7 +215,7 @@ export default function Controls() {
           </div>
         </div>
         <div className={styles.item}>
-          <label for="textSize">Change Font Size</label>
+        <h5>Change Font Size</h5>
           <input
             aria-label="range"
             onChange={changeTextSize}
@@ -198,10 +226,19 @@ export default function Controls() {
             min="1"
             max="3"
             step="0.1"
-            
+          />
+        </div>
+        <div>
+        <h5>Image Controls</h5>
+          <ImageControls
+          filters={IMAGE_FILTERS}
+            controls={IMAGE_CONTROLS}
+            changeControlValue={handleImageControl}
           />
         </div>
       </div>
+      <br/>
+      <br/>
       <Button onClick={handleDownload} />
       <canvas hidden id="control" />
     </>
