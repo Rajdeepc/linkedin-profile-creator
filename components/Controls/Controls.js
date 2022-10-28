@@ -84,7 +84,28 @@ export default function Controls() {
       canvas.width = a * devicePixelRatio
 
       canvas.height = a * devicePixelRatio
-      context.drawImage(base_image, 0, 0, base_image.naturalWidth * devicePixelRatio, base_image.naturalHeight * devicePixelRatio)
+
+    
+      let containerRatio = canvas.width / canvas.height;
+      let width = base_image.naturalWidth;
+      let height = base_image.naturalHeight;
+      let imgRatio = height / width;
+  
+      if (imgRatio > containerRatio) { // image's height too big
+        height = width * containerRatio;
+      } else { // image's width too big
+        width = height / containerRatio;
+      }
+  
+      let s = {
+        width: width,
+        height: height,
+        offsetX: (base_image.naturalWidth - width) * .5,
+        offsetY: (base_image.naturalHeight - height) * .5
+      };
+      context.drawImage(base_image, s.offsetX, s.offsetY, s.width, s.height, 0, 0, canvas.width, canvas.height);
+
+
 
       context.drawImage(image, 0, 0, a * devicePixelRatio, a * devicePixelRatio)
       let png = canvas.toDataURL() // default png

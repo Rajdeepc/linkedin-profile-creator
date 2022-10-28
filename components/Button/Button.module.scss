@@ -1,9 +1,25 @@
 .button{
-    width: 70%;
-    padding: 0.8rem;
-    border-radius: 12px;
+    background: #54873C;
+    width: 50%;
+    padding: 0.6rem;
+    border-radius: 32px;
     border: 0;
-    font-size: 1.2rem;
-    color: #54873C;
+    font-size: 1rem;
+    color: #ffffff;
     font-weight: bold;
+    cursor: pointer;
+    animation: glowing 1300ms infinite;
+
 }
+
+@keyframes glowing {
+    0% {
+      background-color: #54873C;
+    }
+    50% {
+      background-color: #629f4f;
+    }
+    100% {
+      background-color: #54873C;
+    }
+  }
