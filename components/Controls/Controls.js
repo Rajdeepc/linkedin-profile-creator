@@ -148,7 +148,7 @@ export default function Controls() {
         </div>
         <div className={styles.item}>
           <div>Change Color</div>
-          <div className={styles.row}>
+          <div className={styles.space}>
             <div
               className={styles.row}
               onChange={(e) => setSelection(e.target.value)}
