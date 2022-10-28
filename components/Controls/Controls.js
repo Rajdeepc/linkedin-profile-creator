@@ -70,9 +70,7 @@ export default function Controls() {
     // get uploaded local image
     let base_image = new Image()
     base_image.src = photo.imagePreviewUrl
-    base_image.onload = function () {
-      context.drawImage(base_image, 0, 0, base_image.width, base_image.height)
-    }
+    let a = 800;
     // get svg source
     let svgElement = document.getElementById("mysvg")
     let serializer = new XMLSerializer()
@@ -82,13 +80,15 @@ export default function Controls() {
     // load svg as png/svg/jpeg image
     let image = new Image()
     image.onload = () => {
-      canvas.width = image.width
+      canvas.width = a * devicePixelRatio
 
-      canvas.height = image.height
-      // draw image in canvas starting left-0 , top - 0
-      context.drawImage(base_image, 0, 0, image.width, image.height)
+      canvas.height = a * devicePixelRatio
+      // canvas.style.width = "".concat(d.width, "px"),
+      // canvas.style.height = "".concat(d.height, "px");
+      // draw base image in canvas starting left-0 , top - 0
+      context.drawImage(base_image, 0, 0, a * devicePixelRatio, a * devicePixelRatio)
 
-      context.drawImage(image, 0, 0, image.width, image.height)
+      context.drawImage(image, 0, 0, a * devicePixelRatio, a * devicePixelRatio)
       let png = canvas.toDataURL() // default png
       // let jpeg = canvas.toDataURL('image/jpg');
       // let webp = canvas.toDataURL('image/webp');
