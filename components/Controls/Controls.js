@@ -23,7 +23,27 @@ export default function Controls() {
   const [ringColor, setRingColor] = useState("#54873C")
   const [textColor, setTextColor] = useState("#ffffff")
   const [selection, setSelection] = useState("ring")
+  const [options, setOptions] = useState(IMAGE_CONTROLS)
 
+  const getImageStyle = () => {
+    const filters = options.map(option => {
+      return `${option.property}(${option.value}${option.unit})`
+    })
+    return {
+      filter : filters.join(' ')
+    }
+  }
+
+  const handleChangeFIlter = (val, name) => {
+    setOptions(prev => {
+      const ob = prev.map((op) => 
+        op.property === name
+        ? { ...op, value: val }
+        : op
+      )
+      return ob
+    })
+  }
   const uploadFile = (e) => {
     try {
       let reader = new FileReader()
@@ -59,11 +79,10 @@ export default function Controls() {
 
   let triggerDownload = (imgURI) => {
     let a = document.createElement("a")
-    a.setAttribute("download", "image.png")
-    a.setAttribute("href", imgURI)
-    a.setAttribute("target", "_blank")
+    let canvas = document.getElementById("control")
+    a.download = 'edited_image.jpg'
+    a.href = canvas.toDataURL()
     a.click()
-    a.remove()
   }
 
   const handleDownload = () => {
@@ -106,6 +125,7 @@ export default function Controls() {
         offsetX: (base_image.naturalWidth - width) * 0.5,
         offsetY: (base_image.naturalHeight - height) * 0.5,
       }
+      context.filter = getImageStyle().filter
       context.drawImage(
         base_image,
         s.offsetX,
@@ -128,22 +148,6 @@ export default function Controls() {
     image.src = blobURL
   }
 
-  const handleImageControl = (val) => {
-  //   let canvas = document.getElementById("control")
-  //   let context = canvas.getContext("2d")
-  //   let imageData = context.getImageData(0, 0, canvas.width, canvas.height);    
-  //   if(val === 0) {
-  //     context.drawImage(imageData, 0, 0);
-  //   }
-  //  // imageData.style.filter = 'saturation(60%)'
-  //   // console.log(context)
-  //  applyBrightness(
-  //     imageData.data,
-  //     parseInt(val, 10)
-  //   );
-  //   context.putImageData(imageData, 0, 0);
-    
-  }
 
   return (
     <>
@@ -152,6 +156,7 @@ export default function Controls() {
         src={photo?.imagePreviewUrl}
         className={styles.image}
         alt="image upload"
+        style={getImageStyle()}
       />
       <SVGContainer
         text={text}
@@ -233,7 +238,7 @@ export default function Controls() {
           <ImageControls
           filters={IMAGE_FILTERS}
             controls={IMAGE_CONTROLS}
-            changeControlValue={handleImageControl}
+            onChangeFilter={handleChangeFIlter}
           />
         </div>
       </div>
