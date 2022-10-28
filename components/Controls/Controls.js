@@ -8,6 +8,7 @@ const style = {
   fontWeight: "700",
   fill: "#FFFFFF",
   letterSpacing: "2.4px",
+  fontFamily:'sans-serif'
 }
 
 export default function Controls() {
@@ -81,13 +82,13 @@ export default function Controls() {
     // load svg as png/svg/jpeg image
     let image = new Image()
     image.onload = () => {
-      canvas.width = 1600
+      canvas.width = image.width
 
-      canvas.height = 1600
+      canvas.height = image.height
       // draw image in canvas starting left-0 , top - 0
-      context.drawImage(base_image, 0, 0, 1600, 1600)
+      context.drawImage(base_image, 0, 0, image.width, image.height)
 
-      context.drawImage(image, 0, 0, 1600, 1600)
+      context.drawImage(image, 0, 0, image.width, image.height)
       let png = canvas.toDataURL() // default png
       // let jpeg = canvas.toDataURL('image/jpg');
       // let webp = canvas.toDataURL('image/webp');
