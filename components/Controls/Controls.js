@@ -79,6 +79,7 @@ export default function Controls() {
     let blobURL = URL.createObjectURL(svgBlob)
     // load svg as png/svg/jpeg image
     let image = new Image()
+    a = Math.min(base_image.naturalHeight, base_image.naturalWidth, a)
     image.onload = () => {
       canvas.width = a * devicePixelRatio
 
