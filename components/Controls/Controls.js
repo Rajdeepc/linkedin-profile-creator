@@ -71,7 +71,7 @@ export default function Controls() {
     let base_image = new Image()
     base_image.src = photo.imagePreviewUrl
     base_image.onload = function () {
-      context.drawImage(base_image, 0, 0)
+      context.drawImage(base_image, 0, 0, base_image.width, base_image.height)
     }
     // get svg source
     let svgElement = document.getElementById("mysvg")
